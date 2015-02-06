@@ -53,3 +53,13 @@ python_virtualenv node.default['webapp']['venv'] do
     owner node[:user]
     group node[:user]
 end
+
+script "Install requirements for python application" do
+  interpreter "bash"
+  user node[:user]
+  group node[:user]
+  code <<-EOH
+  #{node.default['webapp']['venv']}/bin/pip install -r #{node.default['webapp']['requirements_file']}
+  EOH
+end
+

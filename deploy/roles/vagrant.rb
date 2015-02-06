@@ -1,12 +1,6 @@
 name "vagrant"
 
 run_list(
-    # "recipe[openssl]",
-    # "recipe[build-essential]",
-    # "recipe[git]",
-    # "recipe[python]",
-    # "recipe[apt]",
-    # "recipe[postgresql::server]",
     "recipe[webapp]",
 )
 

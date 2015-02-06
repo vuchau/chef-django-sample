@@ -1,0 +1,6 @@
+[program:backend]
+command = "<%= node.default['webapp']['venv']%>"/guni-script.sh                     ; Command to start app
+user = "<%= node[:user]%>"                                               ; User to run as
+autostart = true
+autorestart = true
+redirect_stderr = true                                      ; Save stderr in the same log

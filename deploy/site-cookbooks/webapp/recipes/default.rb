@@ -61,3 +61,31 @@ script "Install requirements for python application" do
   EOH
 end
 
+# Config
+if node[:user] == "vagrant"
+    # For vagrant
+    template "/home/vagrant/.bashrc" do
+        source "bashrc.erb"
+        owner "vagrant"
+    end
+
+    # testing ith vagrant
+    include_recipe "supervisor"
+    include_recipe "nginx"
+
+    # Copy supvisior script
+    template "/etc/supervisor.d/backend.conf" do
+        source "supervisior.conf.erb"
+        owner "vagrant"
+    end
+
+    # Nginx
+    #
+else
+    include_recipe "supervisor"
+    include_recipe "nginx"
+    # For remote server
+end
+
+
+

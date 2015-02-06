@@ -1,0 +1,7 @@
+
+APPS="<%= node.default['webapp']['source_dir']%>"
+
+VENV="<%= node.default['webapp']['venv']%>"
+
+cd $APPS && source $VENV/bin/activate
+

@@ -1,12 +1,12 @@
 name "vagrant"
 
 run_list(
-    "recipe[openssl]",
-    "recipe[build-essential]",
-    "recipe[git]",
-    "recipe[python]",
-    "recipe[apt]",
-    "recipe[postgresql::server]",
+    # "recipe[openssl]",
+    # "recipe[build-essential]",
+    # "recipe[git]",
+    # "recipe[python]",
+    # "recipe[apt]",
+    # "recipe[postgresql::server]",
     "recipe[webapp]",
 )
 
@@ -16,7 +16,8 @@ default_attributes(
   },
   'postgresql'=> {
     'password' => {
-        'postgres'=> 'Abcde@12345'
+        'postgres'=> 'Abcde@12345',
+        'vagrant'=> 'vagrant'
     }
   },
   'dbname' => 'example',

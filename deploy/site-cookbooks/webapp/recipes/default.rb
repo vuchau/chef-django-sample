@@ -17,13 +17,6 @@ package "curl"
 package "htop"
 package "mosh"
 
-# PIL dependencies
-package "libjpeg8"
-package "libjpeg-dev"
-package "libfreetype6"
-package "libfreetype6-dev"
-package "zlib1g-dev"
-
 # Base recipe
 include_recipe "openssl"
 include_recipe "build-essential::default"
@@ -40,6 +33,11 @@ end
 # Postgres database
 execute "restart postgres" do
     command "sudo /etc/init.d/postgresql restart"
+end
+
+execute "create user" do
+    command "createuser -Upostgres --superuser #{node[:user]}"
+    not_if "psql -U postgres -c '\\du' | grep #{node[:user]}"
 end
 
 execute "create database" do

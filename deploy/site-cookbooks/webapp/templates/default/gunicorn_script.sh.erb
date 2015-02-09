@@ -5,19 +5,19 @@
 # http://michal.karzynski.pl/blog/2013/06/09/django-nginx-gunicorn-virtualenv-supervisor/
 
 NAME="backend"                                                  # Name of the application
-DJANGODIR="<%= node.default['webapp']['backend'] %>" # Django project directory
+DJANGODIR=<%= node.default['webapp']['backend'] %> # Django project directory
 SOCKFILE=$DJANGODIR/run/gunicorn.sock             # we will communicte using this unix socket
-USER="<%= node[:user] %>"                                                     # the user to run as
-GROUP="<%= node[:user] %>"                                                    # the group to run as
-NUM_WORKERS=3                                                   # how many worker processes should Gunicorn spawn
-DJANGO_SETTINGS_MODULE=backend.settings.run_environment                 # which settings file should Django use
+USER=<%= node[:user] %>                                                     # the user to run as
+GROUP=<%= node[:user] %>                                                    # the group to run as
+NUM_WORKERS=<%= node.default['webapp']['num_worker'] %>                                                   # how many worker processes should Gunicorn spawn
+DJANGO_SETTINGS_MODULE=backend.settings.<%= node[:django_application][:setting_file] %>                 # which settings file should Django use
 DJANGO_WSGI_MODULE=backend.wsgi                                 # WSGI module name
 
 echo "Starting $NAME as `whoami`"
 
 # Activate the virtual environment
 
-source "<%= node.default['webapp']['venv'] %>"/bin/activate
+source <%= node.default['webapp']['activate'] %>
 
 cd $DJANGODIR
 export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE
@@ -34,4 +34,4 @@ exec gunicorn ${DJANGO_WSGI_MODULE}:application \
   --workers $NUM_WORKERS \
   --user=$USER --group=$GROUP \
   --log-level=debug \
-  --bind=127.0.0.1:8001
+  --bind=127.0.0.1:<%= node.default['webapp']['gunicorn_port'] %>

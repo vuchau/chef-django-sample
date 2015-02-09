@@ -1,13 +1,7 @@
 # Webapp recipe
 # ============
 
-execute "clean it" do
-    command "apt-get clean -y"
-end
 
-execute "update package index" do
-    command "apt-get update"
-end
 
 # Base package
 package "vim"
@@ -19,11 +13,21 @@ package "mosh"
 
 # Base recipe
 include_recipe "openssl"
-include_recipe "build-essential::default"
+include_recipe "build-essential"
 include_recipe "git"
 include_recipe "python"
 include_recipe "apt"
 include_recipe "postgresql::server"
+include_recipe "vim"
+
+# Get data from bags
+app = data_bag_item("apps", "example")
+app1 = data_bag_item("apps", "example1")
+
+# Overwrite attribute
+node.default['webapp']['settings_file'] = app['django_app']['settings_file']
+node.default['webapp']['gunicorn_port'] = app['gunicorn']['port']
+node.default['webapp']['num_worker'] = app['gunicorn']['num_worker']
 
 cookbook_file "/etc/postgresql/#{node[:postgresql][:version]}/main/pg_hba.conf" do
     source "pg_hba.conf"
@@ -36,13 +40,13 @@ execute "restart postgres" do
 end
 
 execute "create user" do
-    command "createuser -Upostgres --superuser #{node[:user]}"
-    not_if "psql -U postgres -c '\\du' | grep #{node[:user]}"
+    command "createuser -Upostgres --superuser #{app['databases']['username']}"
+    not_if "psql -U postgres -c '\\du' | grep #{app['databases']['username']}"
 end
 
 execute "create database" do
-    command "createdb -U postgres -T template0 -O postgres #{node[:dbname]} -E UTF8 --locale=en_US.UTF-8"
-    not_if "psql -U postgres --list | grep #{node[:dbname]}"
+    command "createdb -U postgres -T template0 -O postgres #{app['databases']['name']} -E #{app['databases']['encoding']} --locale=#{app['databases']['locale']}"
+    not_if "psql -U postgres --list | grep #{app['databases']['name']}"
 end
 
 # Python environment
@@ -57,34 +61,26 @@ script "Install requirements for python application" do
   user node[:user]
   group node[:user]
   code <<-EOH
-  #{node.default['webapp']['venv']}/bin/pip install -r #{node.default['webapp']['requirements_file']}
+  #{node.default[:webapp][:pip]} install -r #{node.default[:webapp][:requirements_file]}
   EOH
 end
 
-# Config
-if node[:user] == "vagrant"
-    # For vagrant
-    template "/home/vagrant/.bashrc" do
-        source "bashrc.erb"
-        owner "vagrant"
-    end
+script "Syncdb" do
+  interpreter "bash"
+  user node[:user]
+  group node[:user]
+  code <<-EOH
+  #{node.default['webapp']['python']} #{node.default[:webapp][:backend]}/manage.py syncdb --noinput --settings=backend.settings.#{node.default[:webapp][:settings_file]}
+  EOH
+end
 
-    # testing ith vagrant
-    include_recipe "supervisor"
-    include_recipe "nginx"
-
-    # Copy supvisior script
-    template "/etc/supervisor.d/backend.conf" do
-        source "supervisior.conf.erb"
-        owner "vagrant"
-    end
-
-    # Nginx
-    #
-else
-    include_recipe "supervisor"
-    include_recipe "nginx"
-    # For remote server
+script "Migrate" do
+  interpreter "bash"
+  user node[:user]
+  group node[:user]
+  code <<-EOH
+  #{node.default['webapp']['python']} #{node.default[:webapp][:backend]}/manage.py migrate --settings=backend.settings.#{node.default[:webapp][:settings_file]}
+  EOH
 end
 
 

@@ -1,0 +1,25 @@
+{
+  "id": "example",
+  "owner": "nobody",
+  "group": "nogroup",
+  "app_name": "example",
+  "repository": "https://github.com/vuchauthanh/chef-django-sample.git",
+  "django_app": {
+    "admin_username": "admin",
+    "admin_password": "admin",
+    "site_domain": "54.68.3.255",
+    "settings_file": "local"
+  },
+  "gunicorn": {
+    "port": 8001,
+    "num_worker": "3"
+  },
+  "databases": {
+    "encoding": "UTF8",
+    "locale": "en_US.UTF-8",
+    "username": "example",
+    "port": 5432,
+    "name": "example_dev",
+    "password": "example@12345"
+  }
+}

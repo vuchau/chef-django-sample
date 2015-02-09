@@ -1,3 +1,5 @@
+ENVIRONMENT=local
+export DJANGO_SETTINGS_MODULE=backend.settings.$ENVIRONMENT
 
 APPS="<%= node.default['webapp']['source_dir']%>"
 

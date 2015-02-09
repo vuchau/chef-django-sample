@@ -2,6 +2,7 @@ name "vagrant"
 
 run_list(
     "recipe[webapp]",
+    "recipe[webapp::deployment]",
 )
 
 default_attributes(
@@ -15,5 +16,9 @@ default_attributes(
     }
   },
   'dbname' => 'example',
-  'user' => 'vagrant'
+  'user' => 'vagrant',
+  'django_application' => {
+    'setting_file'=> 'local',
+    'port'=> '8001',
+  }
 )

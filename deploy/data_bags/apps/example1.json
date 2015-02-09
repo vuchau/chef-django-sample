@@ -1,0 +1,9 @@
+{
+  "id": "example1",
+  "usernamr": {
+    "encrypted_data": "76EofTdxJP1rmiOh1SOv3LQa0I0QHA9r85thBFSoet4=\n",
+    "iv": "V3v1jJ36ySBIHlqayz366A==\n",
+    "version": 1,
+    "cipher": "aes-256-cbc"
+  }
+}

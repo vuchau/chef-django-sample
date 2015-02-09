@@ -10,11 +10,11 @@ server {
     client_max_body_size 4G;
 
     location /static/admin/ {
-        alias "<%= node.default['webapp']['venv']%>"/lib/python2.7/dist-packages/django/contrib/admin/static/admin/;
+        alias <%= node.default['webapp']['venv']%>/lib/python2.7/site-packages/django/contrib/admin/static/admin/;
     }
 
     location /media/ {
-        alias "<%= node.default['webapp']['backend']%>"/media/;
+        alias <%= node.default['webapp']['backend']%>/media/;
     }
 
     location / {

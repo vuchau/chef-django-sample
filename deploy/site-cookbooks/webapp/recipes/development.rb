@@ -1,12 +1,5 @@
-include_recipe "nginx"
-include_recipe "supervisor"
-include_recipe "redis"
-
-
-service "supervisor" do
-    action :stop
-end
-
-service "supervisor" do
-    action :start
+# For vagrant
+template "/home/vagrant/.bashrc" do
+    source "bashrc.erb"
+    owner "vagrant"
 end

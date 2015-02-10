@@ -49,17 +49,21 @@ Vagrant.configure(2) do |config|
   config.vm.provider :virtualbox do |vb|
     vb.customize ["modifyvm", :id, "--name", "chef-demo", "--memory", "512"]
   end
-
+  VAGRANT_JSON = JSON.parse(Pathname(__FILE__).dirname.join('../deploy/nodes', 'vagrant.json').read)
   config.vm.provision :chef_solo do |chef|
         chef.cookbooks_path = ["../deploy/site-cookbooks", "../deploy/cookbooks"]
         chef.roles_path = "../deploy/roles"
         chef.data_bags_path = "../deploy/data_bags"
         chef.provisioning_path = "/tmp/vagrant_chef"
-        chef.add_role("vagrant")
+        chef.environments_path = "../deploy/environments"
+        chef.environment = "development"
+        chef.encrypted_data_bag_secret_key_path = "../deploy/data_bag_key"
         #chef.log_level = :debug
+
+        #chef.add_role("vagrant")
         # You may also specify custom JSON attributes:
-        # chef.run_list = VAGRANT_JSON.delete('run_list')
-        # chef.json = VAGRANT_JSON
+        chef.run_list = VAGRANT_JSON.delete('run_list')
+        chef.json = VAGRANT_JSON
   end
 
 

@@ -1,25 +1,27 @@
 {
   "id": "example",
-  "owner": "nobody",
-  "group": "nogroup",
-  "app_name": "example",
-  "repository": "https://github.com/vuchauthanh/chef-django-sample.git",
-  "django_app": {
-    "admin_username": "admin",
-    "admin_password": "admin",
-    "site_domain": "54.68.3.255",
-    "settings_file": "local"
+  "app_name": {
+    "encrypted_data": "dzBpr6en7tnOs0KOgSQsptax+VStb76W1/eNSVeFuBY=\n",
+    "iv": "UrxBJulQANk4/tIeLjxG9Q==\n",
+    "version": 1,
+    "cipher": "aes-256-cbc"
   },
-  "gunicorn": {
-    "port": 8001,
-    "num_worker": "3"
+  "repository": {
+    "encrypted_data": "Q28YcToSuFMhls3wY6NZbF04omZnDQZrx5Eg+DT0V57qYrEhKW4PJ+f8/41i\nUmAPOW/U7lLctJ7m9bbvwLLnwK4X8TJTKg3yevJj6/h6A2s=\n",
+    "iv": "z1VWgWy5bKJR6yw3jVcNJw==\n",
+    "version": 1,
+    "cipher": "aes-256-cbc"
+  },
+  "django_app": {
+    "encrypted_data": "StS4sVSOjti1LZ8OVYU1uIZrzJBEN6g1MZ87rQtObAkUmHUsyEE6cNd9GeG/\nWMkWkTsTt1iqkWAOgsJAvRi3GJja+q3T8JU2wfSo/9Epm94=\n",
+    "iv": "mHzwGlyBXMZHshiO4WNNmg==\n",
+    "version": 1,
+    "cipher": "aes-256-cbc"
   },
   "databases": {
-    "encoding": "UTF8",
-    "locale": "en_US.UTF-8",
-    "username": "example",
-    "port": 5432,
-    "name": "example_dev",
-    "password": "example@12345"
+    "encrypted_data": "P9fCGv1oU4a5NgqbrTrhgV8GjZOXY3OllxQJXd/SmEcAPvcsFMVZqj+rXwPv\n5rCA2bLMmIO6l0CJq4mYXv5a5MLFXe6CEmsugFMqhnn3zEghgJ8E3lCrJVyx\nqfpJLHsQun6kf5xSTmkpXhDUMjL2R8BLPe0pVdMkZC3Vcm50fpMxLd9PXGTV\nrynxCbJvoQRr\n",
+    "iv": "rQFzYpV7oeYpU950SgzVQw==\n",
+    "version": 1,
+    "cipher": "aes-256-cbc"
   }
 }

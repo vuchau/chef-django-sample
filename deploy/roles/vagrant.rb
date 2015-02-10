@@ -1,8 +1,7 @@
 name "vagrant"
 
 run_list(
-    "recipe[webapp]",
-    "recipe[webapp::deployment]",
+    "recipe[webapp::default]",
 )
 
 default_attributes(

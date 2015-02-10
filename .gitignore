@@ -66,3 +66,5 @@ cookbooks/
 
 # Mac file
 .idea
+
+data_bag_key

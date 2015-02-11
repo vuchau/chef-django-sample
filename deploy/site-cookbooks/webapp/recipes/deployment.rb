@@ -2,14 +2,6 @@ include_recipe 'openssl'
 include_recipe 'nginx'
 include_recipe 'supervisor'
 
-# Get data from bags
-settings = data_bag_item('apps', 'example')
-
-# Overwrite attribute
-node.default['webapp']['settings_file'] = settings['django_app']['settings_file']
-node.default['webapp']['gunicorn_port'] = settings['gunicorn']['port']
-node.default['webapp']['num_worker'] = settings['gunicorn']['num_worker']
-
 ######## GUNICORN ########
 template node.default['webapp']['gunicorn_script'] do
     source 'gunicorn_script.sh.erb'
@@ -27,6 +19,7 @@ end
 execute 'restart supervisor' do
     command 'sudo /etc/init.d/supervisor restart'
 end
+
 
 ######## NGINX ########
 # Copy nginx config

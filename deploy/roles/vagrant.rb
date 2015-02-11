@@ -2,6 +2,7 @@ name "vagrant"
 
 run_list(
     "recipe[webapp::default]",
+    "recipe[webapp::development]",
 )
 
 default_attributes(

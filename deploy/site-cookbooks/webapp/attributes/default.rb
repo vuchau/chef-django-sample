@@ -22,7 +22,7 @@ default['webapp']['requirements_file'] = "#{default['webapp']['backend']}/requir
 default['webapp']['gunicorn_script'] = "#{default['webapp']['venv']}/gunicorn_script.sh"
 
 # Get from bags
-default['webapp']['settings_file'] = node[:root_dir]
+default['webapp']['settings_file'] = node[:django_app][:settings_file]
 default['webapp']['gunicorn_port'] = node[:gunicorn].nil? ? "" : node[:gunicorn][:port]
 default['webapp']['num_worker'] = node[:gunicorn].nil? ? "" : node[:gunicorn][:num_worker]
 

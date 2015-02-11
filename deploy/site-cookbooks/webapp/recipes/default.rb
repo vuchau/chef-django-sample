@@ -39,15 +39,16 @@ cookbook_file "/etc/postgresql/#{node[:postgresql][:version]}/main/pg_hba.conf" 
     owner "postgres"
 end
 
+execute "create database" do
+    command "createdb -U postgres -T template0 -O postgres #{settings['databases']['name']} -E #{settings['databases']['encoding']} --locale=#{settings['databases']['locale']}"
+    not_if "psql -U postgres --list | grep #{settings['databases']['name']}"
+end
+
 execute "create user" do
     command "createuser -Upostgres --superuser #{settings['databases']['username']}"
     not_if "psql -U postgres -c '\\du' | grep #{settings['databases']['username']}"
 end
 
-execute "create database" do
-    command "createdb -U postgres -T template0 -O postgres #{settings['databases']['name']} -E #{settings['databases']['encoding']} --locale=#{settings['databases']['locale']}"
-    not_if "psql -U postgres --list | grep #{settings['databases']['name']}"
-end
 
 # Python environment
 python_virtualenv node.default['webapp']['venv'] do

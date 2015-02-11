@@ -4,28 +4,29 @@ cookbook_versions({
 
 })
 
+settings = Chef::EncryptedDataBagItem.load('apps', 'example')
+
 default_attributes(
   'build-essential' => {
     'compile_time' => true
   },
   'postgresql'=> {
     'password' => {
-        'postgres'=> 'Abcde@12345',
-        'vagrant'=> 'vagrant'
+        'postgres'=> settings['databases']['password']
     }
   },
   'root_dir'=> '/var/webapps/example',
   'django_app' => {
     'settings_file' => 'production'
   },
-  "gunicorn" => {
-    "port" => 8001,
-    "num_worker" =>"3"
+  'gunicorn' => {
+    'port' => '8001',
+    'num_worker' => '3'
   },
 
   'git'=> {
     'branch'=>'master'
   },
-  "owner" => "ubuntu",
-  "group" => "ubuntu",
+  'owner' => 'ubuntu',
+  'group' => 'ubuntu',
 )

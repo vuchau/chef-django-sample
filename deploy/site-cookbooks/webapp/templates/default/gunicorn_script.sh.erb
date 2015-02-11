@@ -7,10 +7,10 @@
 NAME="backend"                                                  # Name of the application
 DJANGODIR=<%= node.default['webapp']['backend'] %> # Django project directory
 SOCKFILE=$DJANGODIR/run/gunicorn.sock             # we will communicte using this unix socket
-USER=<%= node[:owner] %>                                                     # the user to run as
-GROUP=<%= node[:group] %>                                                    # the group to run as
-NUM_WORKERS=<%= node[:gunicorn][:num_worker] %>                                                   # how many worker processes should Gunicorn spawn
-DJANGO_SETTINGS_MODULE=backend.settings.<%= node[:django_application][:setting_file] %>                 # which settings file should Django use
+USER=<%= node['owner'] %>                                                     # the user to run as
+GROUP=<%= node['group'] %>                                                    # the group to run as
+NUM_WORKERS=<%= node['gunicorn']['num_worker'] %>                                                   # how many worker processes should Gunicorn spawn
+DJANGO_SETTINGS_MODULE=backend.settings.<%= node['django_application']['setting_file'] %>                 # which settings file should Django use
 DJANGO_WSGI_MODULE=backend.wsgi                                 # WSGI module name
 
 echo "Starting $NAME as `whoami`"
@@ -34,4 +34,4 @@ exec gunicorn ${DJANGO_WSGI_MODULE}:application \
   --workers $NUM_WORKERS \
   --user=$USER --group=$GROUP \
   --log-level=debug \
-  --bind=127.0.0.1:<%= node[:gunicorn][:port] %>
+  --bind=127.0.0.1:<%= node['gunicorn']['port'] %>

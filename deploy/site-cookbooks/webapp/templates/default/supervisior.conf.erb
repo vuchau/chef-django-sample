@@ -1,6 +1,6 @@
 [program:backend]
 command = <%= node.default['webapp']['gunicorn_script']%>                     ; Command to start app
-user = <%= node[:owner]%>                                               ; User to run as
+user = <%= node['owner']%>                                               ; User to run as
 autostart = true
 autorestart = true
 redirect_stderr = true                                      ; Save stderr in the same log

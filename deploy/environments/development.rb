@@ -1,7 +1,5 @@
-name "development"
-description "The master development branch"
-
-settings = Chef::EncryptedDataBagItem.load("apps", "example")
+name 'development'
+description 'The master development branch'
 
 cookbook_versions({
 
@@ -21,6 +19,6 @@ default_attributes(
   'django_app' => {
     'settings_file' => 'local'
   },
-  "owner" => "vagrant",
-  "group" => "vagrant"
+  'owner' => 'vagrant',
+  'group' => 'vagrant'
 )

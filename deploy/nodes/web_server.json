@@ -2,5 +2,9 @@
   "run_list": [
     "role[base]",
     "role[web_server]"
-  ]
+  ],
+  "chef_environment": "staging",
+  "automatic": {
+    "ipaddress": "54.68.3.255"
+  }
 }

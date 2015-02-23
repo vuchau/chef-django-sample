@@ -1,6 +1,7 @@
 {
   "run_list": [
       "role[base]",
-      "role[vagrant]"
+      "role[database]",
+      "role[local]"
   ]
 }

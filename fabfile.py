@@ -86,11 +86,11 @@ def bootstrap():
 
     # Make root folder
     if not exists(env['dir_app']):
-        sudo('mkdir -p %s' % env['dir_app'])
+        sudo('mkdir -p %s' % DIR_WEBAPP)
 
-    sudo('chown -R %s %s' % (env['user'], env['dir_app']))
+    sudo('chown -R %s %s' % (env['user'], DIR_WEBAPP))
 
-    with cd(env['dir_app']):
+    with cd(DIR_WEBAPP):
         print(green('Cloning repo from GitHub...'))
         if not exists('%s' % APP_NAME):
             run('git clone %s %s' % (REPO_NAME, APP_NAME))
@@ -102,6 +102,9 @@ def deploy():
     Deploy to server
     """
     print(green('Deploying ...'))
+
+    with cd(env['dir_app']):
+        pass
 
 
 def start():

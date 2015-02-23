@@ -1,26 +1,26 @@
 {
   "id": "example",
-  "app_name": {
-    "encrypted_data": "dzBpr6en7tnOs0KOgSQsptax+VStb76W1/eNSVeFuBY=\n",
-    "iv": "UrxBJulQANk4/tIeLjxG9Q==\n",
-    "version": 1,
-    "cipher": "aes-256-cbc"
-  },
   "repository": {
-    "encrypted_data": "Q28YcToSuFMhls3wY6NZbF04omZnDQZrx5Eg+DT0V57qYrEhKW4PJ+f8/41i\nUmAPOW/U7lLctJ7m9bbvwLLnwK4X8TJTKg3yevJj6/h6A2s=\n",
-    "iv": "z1VWgWy5bKJR6yw3jVcNJw==\n",
+    "encrypted_data": "kubzbJThTlc9d6effp8P3qmAxExlbZHt0jCWQRv9D6PWryAkQg3UnHtr86WY\nrK0raz3PcK+oSyxYCGx7zfynXCm1XTBPz2MTYxUELahfjOs=\n",
+    "iv": "362D+FsJ83ldF7kGIwj4ZA==\n",
     "version": 1,
     "cipher": "aes-256-cbc"
   },
-  "django_app": {
-    "encrypted_data": "StS4sVSOjti1LZ8OVYU1uIZrzJBEN6g1MZ87rQtObAkUmHUsyEE6cNd9GeG/\nWMkWkTsTt1iqkWAOgsJAvRi3GJja+q3T8JU2wfSo/9Epm94=\n",
-    "iv": "mHzwGlyBXMZHshiO4WNNmg==\n",
+  "app_name": {
+    "encrypted_data": "ib9xgIjUhmwmsxvnJBYqEd60CIQxumO9rbyOtIb9KpI=\n",
+    "iv": "zKpAbMy9XWNTr/CpvXSKQw==\n",
     "version": 1,
     "cipher": "aes-256-cbc"
   },
-  "databases": {
-    "encrypted_data": "P9fCGv1oU4a5NgqbrTrhgV8GjZOXY3OllxQJXd/SmEcAPvcsFMVZqj+rXwPv\n5rCA2bLMmIO6l0CJq4mYXv5a5MLFXe6CEmsugFMqhnn3zEghgJ8E3lCrJVyx\nqfpJLHsQun6kf5xSTmkpXhDUMjL2R8BLPe0pVdMkZC3Vcm50fpMxLd9PXGTV\nrynxCbJvoQRr\n",
-    "iv": "rQFzYpV7oeYpU950SgzVQw==\n",
+  "production": {
+    "encrypted_data": "2pyoHK6riutMRYbUb+htLI+pTyndlpyI2u9wWaE89btKCHUh8w1gERy00tgs\nNpRsRf+lkF0Sm5hZpbaCtoJoZNMyZGg2rQKAQ0pRP0nkYuvTkwf/tA/F3dxJ\n2hPMahzEQs92XDOCElFKKNExjPnxDbOl5R89mq4oFHxU8cg5B8+dm2DqkyOK\nNorxIGmWKoiHot5yih9PMTkWsOiQaXH/ul9wiqgDRekugXlGHnwsATxkjyjq\nEYZm4R9W50dvCI62tg8EQjObD88I902m7PHFUS9XgPmqsvIWRLru0xYqbOI=\n",
+    "iv": "clS+3f/sHwDhpRBYaZuhsg==\n",
+    "version": 1,
+    "cipher": "aes-256-cbc"
+  },
+  "staging": {
+    "encrypted_data": "IXC/YvjL7SYVkjjGxfPi8s5xhZFhv6O79E6feNY2JmXjOjs7LkUEgxGGaBGi\n6OzrZYbdGzYKsiaHFX/xFdECDlxFWKpwmSdOvIln7ECJGpC3S091P90TYIjB\nyIkEqnfYmMWBrHaMYwPuIggtRMNiBYArV/OTmGi4Zpqvr5I1i0agkb7dW4Uw\n29KkF5WZTfkyM6RBR4816N5boS9KsT7y/mo1WnKmqz3bEkWv3UZKjlZ81+Li\nhl5g+s1EOkvBJJgEfXycwew1KaryvmRhNWqHZVUe2Qk+ZQTkOOrrWdT9Ehw=\n",
+    "iv": "DhrAGCG1VcAQ23CO5XShFw==\n",
     "version": 1,
     "cipher": "aes-256-cbc"
   }

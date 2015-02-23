@@ -16,9 +16,13 @@ template '/etc/supervisor.d/backend.conf' do
     owner node['owner']
 end
 
-execute 'restart supervisor' do
-    command 'sudo /etc/init.d/supervisor restart'
+service 'supervisor' do
+  action:restart
 end
+
+# execute 'restart supervisor' do
+#     command 'sudo /etc/init.d/supervisor restart'
+# end
 
 
 ######## NGINX ########
@@ -28,6 +32,10 @@ template '/etc/nginx/sites-enabled/default' do
     owner node['owner']
 end
 
-execute 'restart nginx' do
-    command 'sudo /etc/init.d/nginx restart'
+# execute 'restart nginx' do
+#     command 'sudo /etc/init.d/nginx restart'
+# end
+
+service 'nginx' do
+  action:restart
 end

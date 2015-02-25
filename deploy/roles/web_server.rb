@@ -3,5 +3,6 @@ description "A node hosting a running Django/gunicorn process"
 
 run_list(
     "recipe[webapp::default]",
-    "recipe[webapp::deployment]"
+    "recipe[webapp::deployment]",
+    "recipe[webapp::celery]"
 )

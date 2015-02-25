@@ -26,8 +26,7 @@ if node.chef_environment == 'development'
     owner node['owner']
   end
 else
-  directory node['root_dir'] do
-    path node['root_dir']
+  directory node.default['webapp']['root_dir'] do
     owner node['owner']
     group node['group']
     mode '0755'
@@ -35,11 +34,22 @@ else
   end
 
   # Pull code
-  git "#{node['root_dir']}" do
+  git node['root_dir'] do
     repository settings['repository']
     revision node['git']['branch']
+    user node['owner']
+    group node['group']
     action 'sync'
   end
+
+  # Create logs dir
+  directory node.default['webapp']['logs'] do
+    owner node['owner']
+    group node['group']
+    mode '0755'
+    action :create
+  end
+
 end
 
 # Python environment
@@ -49,30 +59,32 @@ python_virtualenv node.default['webapp']['venv'] do
   group node['group']
 end
 
-# execute 'Install requirements for python application' do
-#   command "#{node.default['webapp']['pip']} install -r #{node.default['webapp']['requirements_file']}"
-# end
+execute 'Install requirements for python application' do
+  command "#{node.default['webapp']['pip']} install -r #{node.default['webapp']['requirements_file']}"
+end
 
 # Copy postactivate
 template "#{node.default['webapp']['postactivate']}" do
     source 'virtualenv_postactivate.erb'
     owner node['owner']
+    group node['group']
 end
-
-Chef::Log.info("#{node.default['webapp']['postactivate']}")
 
 ruby_block "Insert source postactivate" do
   block do
     file = Chef::Util::FileEdit.new("#{node.default['webapp']['activate']}")
-    file.insert_line_if_no_match("/source #{node.default['webapp']['postactivate']}/", "source #{node.default['webapp']['postactivate']}")
+    file.insert_line_if_no_match("source #{node.default['webapp']['postactivate']}", "source #{node.default['webapp']['postactivate']}")
     file.write_file
   end
 end
 
-execute 'Syncdb' do
-  command "#{node.default['webapp']['python']} #{node.default['webapp']['backend']}/manage.py syncdb --noinput --settings=backend.settings.#{node.default['webapp']['settings_file']}"
+# Syncdb and migrate python application
+# TODO review
+bash 'Syncdb' do
+  command "source #{node.default['webapp']['activate']} && python #{node.default['webapp']['backend']}/manage.py syncdb --noinput --settings=backend.settings.#{node['django_app']['settings_file']}"
 end
 
-execute 'Migrate' do
-  command "#{node.default['webapp']['python']} #{node.default['webapp']['backend']}/manage.py migrate  --settings=backend.settings.#{node.default['webapp']['settings_file']}"
+bash 'Migrate' do
+  command "source #{node.default['webapp']['activate']} && python #{node.default['webapp']['backend']}/manage.py migrate --settings=backend.settings.#{node['django_app']['settings_file']}"
 end
+

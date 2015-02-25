@@ -1,6 +1,9 @@
 [program:backend]
 command = <%= node.default['webapp']['gunicorn_script']%>                     ; Command to start app
 user = <%= node['owner']%>                                               ; User to run as
+stderr_logfile = <%= node.default['webapp']['logs']%>/error_supervisiord.log                                  ; Where to write error log
+stdout_logfile = <%= node.default['webapp']['logs']%>/info_supervisiord.log                                  ; Where to write log
 autostart = true
 autorestart = true
 redirect_stderr = true                                      ; Save stderr in the same log
+environment=LANG=en_US.UTF-8,LC_ALL=en_US.UTF-8

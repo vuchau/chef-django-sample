@@ -10,7 +10,7 @@ SOCKFILE=$DJANGODIR/run/gunicorn.sock             # we will communicte using thi
 USER=<%= node['owner'] %>                                                     # the user to run as
 GROUP=<%= node['group'] %>                                                    # the group to run as
 NUM_WORKERS=<%= node['gunicorn']['num_worker'] %>                                                   # how many worker processes should Gunicorn spawn
-DJANGO_SETTINGS_MODULE=backend.settings.<%= node['django_application']['setting_file'] %>                 # which settings file should Django use
+DJANGO_SETTINGS_MODULE=backend.settings.<%= node['django_app']['settings_file']%>                 # which settings file should Django use
 DJANGO_WSGI_MODULE=backend.wsgi                                 # WSGI module name
 
 echo "Starting $NAME as `whoami`"

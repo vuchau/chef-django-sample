@@ -18,7 +18,7 @@ STATIC_ROOT = 'backend_path/static'
 
 ########## HOST CONFIGURATION
 # See: https://docs.djangoproject.com/en/1.7/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1', '*']
 ########## END HOST CONFIGURATION
 
 DEBUG = False

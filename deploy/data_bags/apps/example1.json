@@ -1,0 +1,33 @@
+{
+  "id": "example1",
+    "repository": "https://github.com/vuchauthanh/chef-django-sample",
+    "app_name": "example",
+    "production": {
+      "database": {
+        "root_password": "prod@root123",
+        "db_name": "prod_db",
+        "db_user": "prod_user",
+        "db_pass": "prod_pass",
+      "host": "127.0.0.1",
+       "port": "5432"
+     },
+      "django": {
+        "user_name": "admin",
+        "password": "prod_admin"
+      }
+    },
+    "staging": {
+      "database": {
+        "root_password": "stg@root123",
+        "db_name": "stg_db",
+        "db_user": "stg_user",
+        "db_pass": "stg_pass",
+        "host": "127.0.0.1",
+        "port": "5432"
+      },
+      "django": {
+        "user_name": "admin",
+        "password": "stg_admin"
+      }
+    }
+}

@@ -20,10 +20,6 @@ service 'supervisor' do
   action:restart
 end
 
-# execute 'restart supervisor' do
-#     command 'sudo /etc/init.d/supervisor restart'
-# end
-
 
 ######## NGINX ########
 # Copy nginx config
@@ -31,10 +27,6 @@ template '/etc/nginx/sites-enabled/default' do
     source 'nginx.conf.erb'
     owner node['owner']
 end
-
-# execute 'restart nginx' do
-#     command 'sudo /etc/init.d/nginx restart'
-# end
 
 service 'nginx' do
   action:restart

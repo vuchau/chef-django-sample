@@ -5,7 +5,7 @@ default_attributes(
   'root_dir'=> '/var/webapps/example',
   'django_app' => {
       'settings_file' => 'staging',
-      'allow_hosts' => %w('example.com','127.0.0.1')
+      'allow_hosts' => %w('52.10.221.175','127.0.0.1')
   },
   'gunicorn' => {
       'port' => '8001',

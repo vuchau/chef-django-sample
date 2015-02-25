@@ -1,6 +1,7 @@
 name 'database'
-
+description "A node hosting a database."
 run_list(
+    'recipe[build-essential]',
     'recipe[postgresql::server]',
     'recipe[webapp::database]'
 )
@@ -8,6 +9,8 @@ run_list(
 override_attributes(
   'postgresql' => {
     'config' => {"listen_addresses" => '*'},
-    'password' => 'postgres'
+    'password' => {
+      'postgres' => 'postgres_pass'
+    }
   }
 )

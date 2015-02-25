@@ -28,7 +28,7 @@ when 'development'
   default['webapp']['source_dir'] = '/src'
 else
   default['webapp']['source_dir'] = "#{node['root_dir']}/src"
-  db_password = settings[node.chef_environment]['database']['password']
+  db_password = settings[node.chef_environment]['database']['db_pass']
   db_name = settings[node.chef_environment]['database']['db_name']
   username = settings[node.chef_environment]['database']['db_user']
   root_db_password = settings[node.chef_environment]['database']['root_password']
@@ -41,15 +41,17 @@ end
 
 default['webapp']['root_dir'] = node['root_dir']
 default['webapp']['backend'] = "#{default['webapp']['source_dir']}/backend"
-default['webapp']['logs'] = "#{default['webapp']['source_dir']}/logs"
+default['webapp']['logs'] = "#{node['root_dir']}/logs"
 default['webapp']['frontend'] = "#{default['webapp']['source_dir']}/frontend"
 default['webapp']['venv'] = "#{default['webapp']['backend']}/venv"
 default['webapp']['activate'] = "#{default['webapp']['venv']}/bin/activate"
+default['webapp']['celery'] = "#{default['webapp']['venv']}/bin/celery"
 default['webapp']['postactivate'] = "#{default['webapp']['venv']}/bin/postactivate"
 default['webapp']['pip'] = "#{default['webapp']['venv']}/bin/pip"
 default['webapp']['python'] = "#{default['webapp']['venv']}/bin/python"
 default['webapp']['requirements_file'] = "#{default['webapp']['backend']}/requirements.txt"
 default['webapp']['gunicorn_script'] = "#{default['webapp']['venv']}/gunicorn_script.sh"
+default['webapp']['celery_script'] = "#{default['webapp']['venv']}/celery_script.sh"
 
 # Get from bags and set values for each envs
 # Database

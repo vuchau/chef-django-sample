@@ -2,7 +2,9 @@
   "run_list": [
     "role[base]",
     "role[database]",
-    "role[web_server]"
+    "role[redis]",
+    "role[web_server]",
+    "role[celery]"
   ]
 }
 

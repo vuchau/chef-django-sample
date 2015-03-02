@@ -1,4 +1,5 @@
 include_recipe 'redisio'
+include_recipe 'redisio::enable'
 
 # Generate local settings for web-admin app
 template "#{node.default['webapp']['celery_script']}" do

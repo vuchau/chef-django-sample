@@ -2,7 +2,10 @@ name "staging"
 description "The master staging branch"
 
 default_attributes(
-  'root_dir'=> '/var/webapps/example',
+  'data_bag' => {
+      'encrypted' => false
+  },
+  'root_dir'=> '/var/webapps',
   'django_app' => {
       'settings_file' => 'staging',
       'allow_hosts' => %w('52.10.221.175','127.0.0.1')
@@ -11,7 +14,6 @@ default_attributes(
       'port' => '8001',
       'num_worker' => '3'
   },
-
   'git'=> {
       'branch'=>'master'
   },

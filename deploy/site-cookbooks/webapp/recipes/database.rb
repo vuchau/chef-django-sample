@@ -1,5 +1,18 @@
 include_recipe "postgresql::server"
 # Get data from bags
+::Chef::Recipe.send(:include, WebappHelpers)
+
+# Retry global information from databag
+app_name = get_app_name
+
+# Set default database info for development env
+# Databse
+username = node['owner']
+db_password = node['owner']
+db_name = "#{app_name}_dev"
+root_db_password = 'postgres'
+db_host = '127.0.0.1'
+db_port = '5432'
 
 # Postgres database
 template ("/etc/postgresql/#{node['postgresql']['version']}/main/pg_hba.conf") do

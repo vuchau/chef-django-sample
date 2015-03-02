@@ -1,4 +1,4 @@
-ENVIRONMENT=local
+ENVIRONMENT=<%= node.chef_environment%>
 export DJANGO_SETTINGS_MODULE=backend.settings.$ENVIRONMENT
 
 APPS="<%= node.default['webapp']['source_dir']%>"

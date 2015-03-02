@@ -1,0 +1,11 @@
+{
+  "id": "webapp",
+    "production": {
+      "user_name": "admin",
+      "password": "prod_admin"
+    },
+    "staging": {
+      "user_name": "admin",
+      "password": "stg_admin"
+    }
+}

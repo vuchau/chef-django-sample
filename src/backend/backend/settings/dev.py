@@ -11,3 +11,8 @@ DATABASES = {
         'PORT': environ.get('DATABASE_PORT', '5432'),
     }
 }
+
+try:
+    from local_settings import *
+except:
+    pass
